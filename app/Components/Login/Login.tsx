@@ -1,6 +1,6 @@
 import { auth, signIn, signOut } from "@/auth";
 
-const Logging = async () => {
+const Login = async () => {
   const session = await auth();
 
   return (
@@ -28,4 +28,4 @@ const Logging = async () => {
   );
 };
 
-export { Logging };
+export { Login };
