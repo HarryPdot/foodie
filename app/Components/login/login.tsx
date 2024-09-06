@@ -1,18 +1,16 @@
-import { useSession, signIn, signOut } from "next-auth/react"
-export default function Component() {
-  const { data: session } = useSession()
-  if (session) {
+
+import { signIn } from "@/auth"
+const Login = () => {
     return (
-      <>
-        Signed in as {session.user.email} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
+        <form
+            action={async () => {
+                "use server"
+                await signIn("Google")
+            }}
+        >
+            <button type="submit">Sign in</button>
+        </form>
     )
-  }
-  return (
-    <>
-      Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
-    </>
-  )
 }
+
+export { Login }
