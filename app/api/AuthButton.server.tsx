@@ -1,21 +1,22 @@
-import { SessionProvider } from 'next-auth/react';
-import { auth } from '@/auth';
+import { SessionProvider } from "next-auth/react";
 
-import { AuthButton } from './AuthButton.client';
+import { auth } from "@/auth";
 
-export const AuthButtonServer = async() => {
-    const session = await auth()
+import { AuthButton } from "./AuthButton.client";
 
-    if ( session && session.user) {
-        session.user = {
-            name: session.user.name,
-            email: session.user.email
-        }
-    }
+export const AuthButtonServer = async () => {
+  const session = await auth();
 
-    return (
-        <SessionProvider refetchInterval={2} session={session}>
-            <AuthButton />
-        </SessionProvider>
-    )
-}
+  if (session && session.user) {
+    session.user = {
+      name: session.user.name,
+      email: session.user.email,
+    };
+  }
+
+  return (
+    <SessionProvider refetchInterval={2} session={session}>
+      <AuthButton />
+    </SessionProvider>
+  );
+};
