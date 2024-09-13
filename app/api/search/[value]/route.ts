@@ -25,6 +25,7 @@ export async function GET(
         open: place.opening_hours?.open_now,
       };
     });
+    console.log(newData);
     return NextResponse.json(newData);
   } catch (error) {
     console.error(error);
