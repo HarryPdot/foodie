@@ -7,8 +7,7 @@ const SearchBar = () => {
   const [data, setData] = useState([]);
   const searchApi = async (e: any) => {
     try {
-      const url = new URL(`/api/search/${search}`, window.location.origin);
-      const res = await fetch(url.href, {
+      const res = await fetch(`https://foodieplaces.vercel.app/api/search/${search}`, {
         method: "GET",
       });
       const data = await res.json();
