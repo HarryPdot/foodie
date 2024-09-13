@@ -14,7 +14,7 @@ export async function GET(
 ) {
   try {
     const res = await fetch(
-      `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${params.value}&type=restaurant&key=${process.env.API_KEY}`,
+      `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${params.value}&type=restaurant&key=${process.env.API_KEY}&region=au`,
     );
     const data = await res.json();
     const newData = data.results.map((place: Place) => {
@@ -23,6 +23,7 @@ export async function GET(
         address: place.formatted_address,
         rating: place.rating,
         open: place.opening_hours?.open_now,
+
       };
     });
     console.log(newData);
