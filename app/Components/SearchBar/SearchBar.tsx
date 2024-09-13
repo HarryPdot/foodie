@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import styles from './card.module.css'
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
@@ -33,11 +34,11 @@ const SearchBar = () => {
       </button>
       {data.map((item: any, i: number) => {
         return (
-          <div key={i}>
-            <p>{item.name}</p>
-            <p>{item.address}</p>
-            <p>{item.rating}</p>
-            <p>{item.open}</p>
+          <div key={i} className={styles.card}>
+            <p>name: {item.name}</p>
+            <p>address: {item.address}</p>
+            <p>rating: {item.rating}</p>
+            <p>open now?:{item.open ? "true" : "false"}</p>
           </div>
         );
       })}
