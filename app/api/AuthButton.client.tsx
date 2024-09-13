@@ -3,15 +3,21 @@
 import { useSession } from "next-auth/react";
 
 import { signIn, signOut } from "../auth/helpers";
+import { useState } from "react";
 
 const AuthButton = () => {
-  const session = useSession();
+  const {data: session, status, update} = useSession();
 
-  return session?.data?.user ? (
+  const handleSignOut = async () => {
+    await signOut();
+    await update({session: null});
+  };
+
+  return session?.user ? (
     <div>
-      Signed in as {session.data.user.name}
+      Signed in as {session?.user.name}
       <br />
-      <button onClick={() => signOut()}>Sign out</button>
+      <button onClick={() => handleSignOut()}>Sign out</button>
     </div>
   ) : (
     <button onClick={() => signIn()}>Sign in</button>

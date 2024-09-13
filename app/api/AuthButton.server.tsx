@@ -10,7 +10,7 @@ export const AuthButtonServer = async () => {
   if (session && session.user) {
     session.user = {
       name: session.user.name,
-      email: session.user.email,
+      email: session.user.email
     };
   }
 

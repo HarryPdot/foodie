@@ -28,6 +28,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return {
         ...token,
+        expires_at: Date.now() + 1000,
       };
     },
     async session({ session, token }: { session: any; token: any }) {
