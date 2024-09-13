@@ -7,7 +7,7 @@ const SearchBar = () => {
   const [data, setData] = useState([]);
   const searchApi = async (e: any) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/search/${search}`, {
+      const res = await fetch(`/api/search/${search}`, {
         method: "GET",
       });
       const data = await res.json();
