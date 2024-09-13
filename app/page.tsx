@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <AuthButtonServer />
-      <SearchBar/>
+      <SearchBar />
     </div>
   );
 }
