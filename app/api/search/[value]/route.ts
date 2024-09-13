@@ -10,7 +10,7 @@ interface Place {
 
 export async function GET(
   request: Request,
-  { params }: { params: { value: string }},
+  { params }: { params: { value: string } },
 ) {
   try {
     const res = await fetch(
@@ -23,10 +23,9 @@ export async function GET(
         address: place.formatted_address,
         rating: place.rating,
         open: place.opening_hours?.open_now,
-
       };
     });
-    console.log(params)
+    console.log(params);
     return NextResponse.json(newData);
   } catch (error) {
     console.error(error);

@@ -1,16 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import styles from './card.module.css'
+
+import styles from "./card.module.css";
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
   const [address, setAddress] = useState("");
   const [data, setData] = useState([]);
   const searchApi = async (e: any) => {
-    const value = search && address ? `${search} food near ${address}` : search || `food near ${address}`
+    const value =
+      search && address
+        ? `${search} food near ${address}`
+        : search || `food near ${address}`;
     try {
-      const url = new URL(`/api/search/${value}?test=test`, window.location.origin);
+      const url = new URL(
+        `/api/search/${value}?test=test`,
+        window.location.origin,
+      );
       const res = await fetch(url.href, {
         method: "GET",
       });
@@ -37,7 +44,10 @@ const SearchBar = () => {
         }}
         placeholder="Search"
       />
-      <button onClick={() => (!search && !address ? null : searchApi(event))} type="submit">
+      <button
+        onClick={() => (!search && !address ? null : searchApi(event))}
+        type="submit"
+      >
         Search
       </button>
       {data.map((item: any, i: number) => {
