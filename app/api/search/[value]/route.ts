@@ -8,7 +8,7 @@ interface Place {
   rating: number;
 }
 
-export async function GET(
+export async function POST(
   request: Request,
   { params }: { params: { value: string } },
 ) {

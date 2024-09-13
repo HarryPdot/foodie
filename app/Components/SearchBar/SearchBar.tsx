@@ -19,7 +19,7 @@ const SearchBar = () => {
         window.location.origin,
       );
       const res = await fetch(url.href, {
-        method: "GET",
+        method: "POST",
       });
       const data = await res.json();
       setData(data);
