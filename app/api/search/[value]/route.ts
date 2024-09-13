@@ -10,11 +10,11 @@ interface Place {
 
 export async function GET(
   request: Request,
-  { params }: { params: { value: string } },
+  { params }: { params: { value: string }},
 ) {
   try {
     const res = await fetch(
-      `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${params.value}&type=restaurant&key=${process.env.API_KEY}&region=au`,
+      `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${params.value}&includedtype=restaurant&key=${process.env.API_KEY}&region=au`,
     );
     const data = await res.json();
     const newData = data.results.map((place: Place) => {
@@ -26,7 +26,7 @@ export async function GET(
 
       };
     });
-    console.log(data);
+    console.log(params)
     return NextResponse.json(newData);
   } catch (error) {
     console.error(error);

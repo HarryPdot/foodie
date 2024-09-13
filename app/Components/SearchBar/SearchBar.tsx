@@ -5,15 +5,16 @@ import styles from './card.module.css'
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
+  const [address, setAddress] = useState("");
   const [data, setData] = useState([]);
   const searchApi = async (e: any) => {
+    const value = search && address ? `${search} food near ${address}` : search || `food near ${address}`
     try {
-      const url = new URL(`/api/search/${search}`, window.location.origin);
+      const url = new URL(`/api/search/${value}?test=test`, window.location.origin);
       const res = await fetch(url.href, {
         method: "GET",
       });
       const data = await res.json();
-      console.log(data);
       setData(data);
     } catch {
       console.error("Internal Server Error:", Error);
@@ -29,7 +30,14 @@ const SearchBar = () => {
         }}
         placeholder="Search"
       />
-      <button onClick={() => (search ? searchApi(event) : null)} type="submit">
+      <input
+        type="text"
+        onChange={(e) => {
+          setAddress(e.target.value);
+        }}
+        placeholder="Search"
+      />
+      <button onClick={() => (!search && !address ? null : searchApi(event))} type="submit">
         Search
       </button>
       {data.map((item: any, i: number) => {
