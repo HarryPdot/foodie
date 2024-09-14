@@ -1,4 +1,8 @@
 .card {
   border: 1px solid var(--gray-alpha-200);
   padding: 2px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: space-between;
 }
