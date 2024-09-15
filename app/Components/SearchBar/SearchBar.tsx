@@ -33,26 +33,29 @@ const SearchBar = () => {
 
   return (
     <div>
-      <input
-        type="text"
-        onChange={(e) => {
-          setSearch(e.target.value);
-        }}
-        placeholder="Search"
-      />
-      <input
-        type="text"
-        onChange={(e) => {
-          setAddress(e.target.value);
-        }}
-        placeholder="Search"
-      />
-      <button
-        onClick={() => (!search && !address ? null : searchApi(event))}
-        type="submit"
-      >
-        Search
-      </button>
+      <form onSubmit={(event) => event.preventDefault()}>
+        <input
+          type="text"
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+          placeholder="Search"
+        />
+        <input
+          type="text"
+          onChange={(e) => {
+            setAddress(e.target.value);
+          }}
+          placeholder="Search"
+        />
+        <input
+          onClick={() => (search && !address  || !search && !address ? null : searchApi(event))}
+          type="submit"
+          value={"Search"}
+        />
+
+      </form>
+
       {data.map((item: any, i: number) => {
         return (
           <div key={i} className={styles.card}>

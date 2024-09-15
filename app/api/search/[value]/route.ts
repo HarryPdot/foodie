@@ -28,9 +28,8 @@ export async function POST(
   if(address && !value) {
     console.log('1')
   }
-
+  // rank by, type, keyword, address, type, 
   try {
-    if(value === 'food') {
       console.log('yes')
       const geoRes = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address},nsw&key=${process.env.API_KEY}`,
         {
@@ -42,8 +41,9 @@ export async function POST(
         latitude: geoData.results[0].geometry.location.lat,
         longitude: geoData.results[0].geometry.location.lng
       }
-      const res = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${geoLocation.latitude},${geoLocation.longitude}&radius=1500&type=restaurant&keyword=${value}&key=${process.env.API_KEY}`)
+      const res = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${geoLocation.latitude},${geoLocation.longitude}&rankby=distance&type=restaurant,cafe,bakery&keyword=${value}&key=${process.env.API_KEY}`)
       const data = await res.json();
+ 
       const newData = data.results.map((place: NearbySearch) => {
         return {
           name: place.name,
@@ -54,27 +54,7 @@ export async function POST(
         };
       });
       return NextResponse.json(newData);
-    }
-
-    const res = await fetch(
-      `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${value}&includedtype=restaurant&key=${process.env.API_KEY}&region=au`,
-    );
-    const data = await res.json();
-    const newData = data.results.map((place: Place) => {
-      return {
-        name: place.name,
-        address: place.formatted_address,
-        rating: place.rating,
-        open: place.opening_hours?.open_now,
-        types: place.types
-      };
-    });
-    return NextResponse.json(newData);
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 },
-    );
+    NextResponse.json(error);
   }
 }
