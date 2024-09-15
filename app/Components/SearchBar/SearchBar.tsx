@@ -1,15 +1,20 @@
 "use client";
 
 import { useState } from "react";
-
 import styles from "./card.module.css";
-
 import { Text, Button } from '@radix-ui/themes'
-
+import { searchReducer } from './searchReducer'
+import { useReducer } from "react";
 
 const SearchBar = () => {
-  const [search, setSearch] = useState("");
-  const [address, setAddress] = useState("");
+
+  const [state, dispatch] = useReducer(searchReducer, 
+    { 
+      search: "", 
+      address: "" 
+    }
+  );
+  const { search, address } = state;
   const [data, setData] = useState([]);
   const searchApi = async (e: any) => {
 
@@ -34,20 +39,36 @@ const SearchBar = () => {
     }
   };
 
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      {
+        type: "SET_SEARCH",
+        payload: e.target.value
+      }
+    )
+  };
+
+  const handleAddressInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      {
+        type: "SET_ADDRESS",
+        payload: e.target.value
+      }
+    )
+  };
+
   return (
     <div>
       <form onSubmit={(event) => event.preventDefault()}>
         <input
           type="text"
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
+          onChange={(e) => handleSearchInput(e)}
           placeholder="Search"
         />
         <input
           type="text"
           onChange={(e) => {
-            setAddress(e.target.value);
+            handleAddressInput(e);
           }}
           placeholder="Search"
         />

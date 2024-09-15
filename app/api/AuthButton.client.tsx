@@ -1,9 +1,10 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import styles from "./AuthButton.module.css";
 
 import { signIn, signOut } from "../auth/helpers";
+import { Button, Flex, Text } from "@radix-ui/themes";
 
 const AuthButton = () => {
   const { data: session, status, update } = useSession();
@@ -13,15 +14,20 @@ const AuthButton = () => {
     await update({ session: null });
   };
 
-  return session?.user ? (
-    <div>
-      Signed in as {session?.user.name}
-      <br />
-      <button onClick={() => handleSignOut()}>Sign out</button>
-    </div>
-  ) : (
-    <button onClick={() => signIn()}>Sign in</button>
-  );
+  return (
+    <Flex justify={"end"}>
+      {session?.user ? (
+      <Flex direction={"column"} gap={2}>
+        <Button onClick={() => handleSignOut()}>Sign out</Button>
+        <Text>{session?.user.name}</Text>
+      </Flex>
+      ) : (
+      <Button className={styles.Button} onClick={() => signIn()}>Sign in</Button>
+      )}
+    </Flex>
+  )
+  
+
 };
 
 export { AuthButton };

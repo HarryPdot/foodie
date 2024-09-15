@@ -1,12 +1,10 @@
-import { AuthButtonServer } from "./api/AuthButton.server";
-import { SearchBar } from "./Components/SearchBar/SearchBar";
-import styles from "./page.module.css";
+import { Box } from "@radix-ui/themes";
+import { HomePage } from './Components'
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <AuthButtonServer />
-      <SearchBar />
-    </div>
+    <Box>
+      <HomePage/>
+    </Box>
   );
 }

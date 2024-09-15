@@ -15,7 +15,7 @@ export const AuthButtonServer = async () => {
   }
 
   return (
-    <SessionProvider refetchInterval={2} session={session}>
+    <SessionProvider refetchInterval={5} session={session}>
       <AuthButton />
     </SessionProvider>
   );

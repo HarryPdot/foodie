@@ -1,4 +1,4 @@
-import { Home } from "./Home/Home";
-import { SearchBar } from "./SearchBar/SearchBar";
+import { HomePage } from "./HomePage/HomePage"
+import { SearchBar } from "./SearchBar/SearchBar"
 
-export { Home, SearchBar }
+export { HomePage, SearchBar }
