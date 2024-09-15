@@ -1,7 +1,7 @@
+import "@radix-ui/themes/styles.css";
+
+import { Theme } from "@radix-ui/themes";
 import type { Metadata } from "next";
-import '@radix-ui/themes/styles.css'
-import { Theme } from '@radix-ui/themes'
-import { AuthButtonServer } from "./api/AuthButton.server";
 
 export const metadata: Metadata = {
   title: "Foodie",
@@ -17,18 +17,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-          <Theme 
-            appearance="dark" 
-            scaling="100%" 
-            accentColor="mint" 
-            grayColor="gray" 
-            radius="medium"
-            
-            >
-            {/* <AuthButtonServer /> */}
-            {children}
-          </Theme>
-        </body>
+        <Theme
+          appearance="dark"
+          scaling="100%"
+          accentColor="mint"
+          grayColor="gray"
+          radius="medium"
+        >
+          {/* <AuthButtonServer /> */}
+          {children}
+        </Theme>
+      </body>
     </html>
   );
 }
