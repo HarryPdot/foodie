@@ -49,6 +49,7 @@ const SearchBar = () => {
           placeholder="Search"
         />
         <input
+          disabled={search && !address || !search && !address ? true : false}
           onClick={() => (search && !address  || !search && !address ? null : searchApi(event))}
           type="submit"
           value={"Search"}
