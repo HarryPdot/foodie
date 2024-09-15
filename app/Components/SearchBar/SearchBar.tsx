@@ -4,6 +4,9 @@ import { useState } from "react";
 
 import styles from "./card.module.css";
 
+import { Text, Button } from '@radix-ui/themes'
+
+
 const SearchBar = () => {
   const [search, setSearch] = useState("");
   const [address, setAddress] = useState("");
@@ -60,12 +63,12 @@ const SearchBar = () => {
       {data.map((item: any, i: number) => {
         return (
           <div key={i} className={styles.card}>
-            <div>
+            <Text>
               <p>name: {item.name}</p>
               <p>address: {item.address}</p>
               <p>rating: {item.rating}</p>
               <p>open now?:{item.open ? "true" : "false"}</p>
-            </div>
+            </Text>
             { item.types? 
               <p>types: 
                 {
