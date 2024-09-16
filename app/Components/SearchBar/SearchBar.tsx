@@ -1,13 +1,12 @@
 "use client";
 
-import { Button, Text } from "@radix-ui/themes";
+import { Button, Flex, Section, TextField } from "@radix-ui/themes";
 
 import { fetcher } from "../../Service/fetch";
-import styles from "./card.module.css";
 
 const SearchBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
   const { search, address, data } = state;
-  const searchApi = async (e: any) => {
+  const searchApi = async () => {
     const value = search && address ? `${search} near ${address}` : search;
     try {
       const url =
@@ -43,36 +42,23 @@ const SearchBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
       payload: e.target.value,
     });
   };
-
+  
   return (
-    <div>
+    <Section py={'2'}>
       <form onSubmit={(event) => event.preventDefault()}>
-        <input
-          type="text"
-          onChange={(e) => handleSearchInput(e)}
-          placeholder="Search"
-        />
-        <input
-          type="text"
-          onChange={(e) => {
-            handleAddressInput(e);
-          }}
-          placeholder="Search"
-        />
-        <input
-          disabled={
-            (search && !address) || (!search && !address) ? true : false
-          }
-          onClick={() =>
-            (search && !address) || (!search && !address)
-              ? null
-              : searchApi(event)
-          }
-          type="submit"
-          value={"Search"}
-        />
+        <Flex gap={'3'} direction={'column'}>
+          <TextField.Root placeholder="Search" onChange={(e) => handleSearchInput(e)}>
+            <TextField.Slot>
+            </TextField.Slot>
+          </TextField.Root>
+          <TextField.Root placeholder="Address" onChange={(e) => handleAddressInput(e)}>
+            <TextField.Slot>
+            </TextField.Slot>
+          </TextField.Root>
+          <Button disabled={search && !address || !search && !address} onClick={() => searchApi()}>Search</Button>
+        </Flex>
       </form>
-    </div>
+    </Section>
   );
 };
 

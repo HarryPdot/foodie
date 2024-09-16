@@ -26,9 +26,6 @@ export async function POST(
   const url = new URL(request.url);
   const address = url.searchParams.get("address") || "";
   console.log(address);
-  if (address && !value) {
-    console.log("1");
-  }
   // rank by, type, keyword, address, type,
   try {
     console.log("yes");
@@ -58,6 +55,7 @@ export async function POST(
         placeId: place.place_id,
       };
     });
+    console.log(newData);
     return NextResponse.json(newData);
   } catch (error) {
     NextResponse.json(error);
