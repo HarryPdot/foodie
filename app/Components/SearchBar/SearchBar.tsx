@@ -1,19 +1,12 @@
 "use client";
 
 import { Button, Text } from "@radix-ui/themes";
-import { useState } from "react";
-import { useReducer } from "react";
 
 import styles from "./card.module.css";
-import { searchReducer } from "./searchReducer";
+import { fetcher } from "../../Service/fetch";
 
-const SearchBar = () => {
-  const [state, dispatch] = useReducer(searchReducer, {
-    search: "",
-    address: "",
-  });
-  const { search, address } = state;
-  const [data, setData] = useState([]);
+const SearchBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
+  const { search, address, data } = state;
   const searchApi = async (e: any) => {
     const value = search && address ? `${search} near ${address}` : search;
     try {
@@ -27,12 +20,11 @@ const SearchBar = () => {
               `/api/search/${value}?address=${address}`,
               window.location.origin,
             );
-      const res = await fetch(url.href, {
-        method: "POST",
+      const data = await fetcher(url.href, "POST");
+      dispatch({
+        type: "SET_DATA",
+        payload: data,
       });
-      const data = await res.json();
-      console.log(data);
-      setData(data);
     } catch {
       console.error("Internal Server Error:", Error);
     }
