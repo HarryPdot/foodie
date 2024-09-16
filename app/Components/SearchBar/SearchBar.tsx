@@ -72,31 +72,6 @@ const SearchBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
           value={"Search"}
         />
       </form>
-
-      {data.map((item: any, i: number) => {
-        return (
-          <div key={i} className={styles.card}>
-            <Text>
-              <p>name: {item.name}</p>
-              <p>address: {item.address}</p>
-              <p>rating: {item.rating}</p>
-              <p>open now?:{item.open ? "true" : "false"}</p>
-            </Text>
-            {item.types ? (
-              <p>
-                types:
-                {item.types.map((type: string, i: number) => {
-                  return (
-                    <p style={{ border: "1px solid black" }} key={i}>
-                      {type}
-                    </p>
-                  );
-                })}
-              </p>
-            ) : null}
-          </div>
-        );
-      })}
     </div>
   );
 };

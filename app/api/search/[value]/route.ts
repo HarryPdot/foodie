@@ -15,6 +15,7 @@ interface NearbySearch {
   name: string;
   rating: number;
   types: string[];
+  photos: any[];
 }
 
 export async function POST(
@@ -46,6 +47,9 @@ export async function POST(
       `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${geoLocation.latitude},${geoLocation.longitude}&rankby=distance&type=restaurant,cafe,bakery&keyword=${value}&key=${process.env.API_KEY}`,
     );
     const data = await res.json();
+
+    console.log(data.results[0].photos);
+    console.log(data.results[0].opening_hours);
 
     const newData = data.results.map((place: NearbySearch) => {
       return {

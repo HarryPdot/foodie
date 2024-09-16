@@ -15,7 +15,7 @@ const HomePage = () => {
   return (
     <Container>
       <SearchBar state={state} dispatch={dispatch} />
-      <Results />
+      <Results data={state.data} dispatch={dispatch} />
     </Container>
   );
 };
