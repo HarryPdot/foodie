@@ -2,9 +2,9 @@
 import { Container } from "@radix-ui/themes";
 import { useReducer } from "react";
 
+import { Results } from "../Results/Results";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { reducer } from "./reducer";
-import { Results } from "../Results/Results";
 
 const HomePage = () => {
   const [state, dispatch] = useReducer(reducer, {
@@ -14,8 +14,8 @@ const HomePage = () => {
   });
   return (
     <Container>
-      <SearchBar state={state} dispatch={dispatch}/>
-      <Results/>
+      <SearchBar state={state} dispatch={dispatch} />
+      <Results />
     </Container>
   );
 };

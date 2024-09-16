@@ -1,9 +1,5 @@
-
 const Results = () => {
+  return <div></div>;
+};
 
-    return (
-        <div></div>
-    )
-}
-
-export { Results }
+export { Results };

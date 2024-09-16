@@ -2,8 +2,8 @@
 
 import { Button, Text } from "@radix-ui/themes";
 
-import styles from "./card.module.css";
 import { fetcher } from "../../Service/fetch";
+import styles from "./card.module.css";
 
 const SearchBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
   const { search, address, data } = state;
