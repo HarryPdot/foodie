@@ -10,12 +10,12 @@ interface Place {
 }
 
 interface NearbySearch {
+  place_id: string;
   opening_hours: any;
   vicinity: string;
   name: string;
   rating: number;
   types: string[];
-  photos: any[];
 }
 
 export async function POST(
@@ -48,9 +48,6 @@ export async function POST(
     );
     const data = await res.json();
 
-    console.log(data.results[0].photos);
-    console.log(data.results[0].opening_hours);
-
     const newData = data.results.map((place: NearbySearch) => {
       return {
         name: place.name,
@@ -58,6 +55,7 @@ export async function POST(
         rating: place.rating,
         open: place.opening_hours?.open_now,
         types: place.types,
+        placeId: place.place_id,
       };
     });
     return NextResponse.json(newData);
