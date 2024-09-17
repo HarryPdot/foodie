@@ -1,10 +1,10 @@
 "use client";
 
-import { Button, Flex, Section, TextField } from "@radix-ui/themes";
 import * as Form from "@radix-ui/react-form";
-import styles from './card.module.css'
+import { Button, Flex, Section, TextField } from "@radix-ui/themes";
 
 import { fetcher } from "../../Service/fetch";
+import styles from "./card.module.css";
 
 const SearchBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
   const { search, address, data } = state;
@@ -44,36 +44,52 @@ const SearchBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
       payload: e.target.value,
     });
   };
-  
+
   return (
-    <Form.Root className='FormRoot' onSubmit={(event) => event.preventDefault()}>
-      <Flex direction={'column'} gap={'1'}>
-        <Form.Field className="FormField" name='search'>
-          <Flex align={'baseline'} justify={'between'}>
+    <Form.Root
+      className="FormRoot"
+      onSubmit={(event) => event.preventDefault()}
+    >
+      <Flex direction={"column"} gap={"1"}>
+        <Form.Field className="FormField" name="search">
+          <Flex align={"baseline"} justify={"between"}>
             <Form.Label className="FormLabel"> Search </Form.Label>
           </Flex>
-            <Form.Control asChild>
-              <TextField.Root className="Input" onChange={(e) => handleSearchInput(e)} required>
-                <TextField.Slot>
-                </TextField.Slot>
-              </TextField.Root>
-            </Form.Control>
-
+          <Form.Control asChild>
+            <TextField.Root
+              className="Input"
+              onChange={(e) => handleSearchInput(e)}
+              required
+            >
+              <TextField.Slot></TextField.Slot>
+            </TextField.Root>
+          </Form.Control>
         </Form.Field>
-        <Form.Field className="FormField" name='address'>
-          <Flex align={'baseline'} justify={'between'}>
+        <Form.Field className="FormField" name="address">
+          <Flex align={"baseline"} justify={"between"}>
             <Form.Label className="FormLabel">Address</Form.Label>
-            <Form.Message className="FormMessage" match={'valueMissing'}>Place enter an address</Form.Message>
+            <Form.Message className="FormMessage" match={"valueMissing"}>
+              Place enter an address
+            </Form.Message>
           </Flex>
-            <Form.Control asChild>
-              <TextField.Root className="Input" onChange={(e) => handleAddressInput(e)} required>
-                <TextField.Slot>
-                </TextField.Slot>
-              </TextField.Root>
-            </Form.Control>
+          <Form.Control asChild>
+            <TextField.Root
+              className="Input"
+              onChange={(e) => handleAddressInput(e)}
+              required
+            >
+              <TextField.Slot></TextField.Slot>
+            </TextField.Root>
+          </Form.Control>
         </Form.Field>
         <Form.Submit asChild>
-          <Button className="Button" disabled={search && !address || !search && !address} onClick={() => searchApi()}>Search</Button>
+          <Button
+            className="Button"
+            disabled={(search && !address) || (!search && !address)}
+            onClick={() => searchApi()}
+          >
+            Search
+          </Button>
         </Form.Submit>
       </Flex>
     </Form.Root>
