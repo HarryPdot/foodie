@@ -27,7 +27,6 @@ export default function RootLayout({
           grayColor="gray"
           radius="medium"
         >
-          {/* <AuthButtonServer /> */}
           {children}
         </Theme>
       </body>
