@@ -15,6 +15,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         address: action.payload,
       };
+    case "SET_RANK_BY":
+      return {
+        ...state,
+        rankBy: action.payload,
+      };
     default:
       return state;
   }

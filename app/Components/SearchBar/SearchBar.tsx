@@ -7,18 +7,20 @@ import { fetcher } from "../../Service/fetch";
 import styles from "./card.module.css";
 
 const SearchBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
-  const { search, address, data } = state;
+  const { search, address, data, rankBy } = state;
+
   const searchApi = async () => {
+    console.log(state.rankBy);
     const value = search && address ? `${search} near ${address}` : search;
     try {
       const url =
         !search && address
           ? new URL(
-              `/api/search/food?address=${address}`,
+              `/api/search/food?address=${address}&rankBy=${rankBy}`,
               window.location.origin,
             )
           : new URL(
-              `/api/search/${value}?address=${address}`,
+              `/api/search/${value}?address=${address}&rankBy=${rankBy}`,
               window.location.origin,
             );
       const data = await fetcher(url.href, "POST");
@@ -50,66 +52,59 @@ const SearchBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
       className="FormRoot"
       onSubmit={(event) => event.preventDefault()}
     >
-      <Flex direction={"column"} gap={"1"}>
-        <Form.Field className="FormField" name="search">
-          <Flex align={"baseline"} justify={"between"}>
-            <Form.Label className="FormLabel"> Search </Form.Label>
-          </Flex>
-          <Form.Control asChild>
-            <TextField.Root
-              className="Input"
-              onChange={(e) => handleSearchInput(e)}
-              required
-            >
-              <TextField.Slot></TextField.Slot>
-            </TextField.Root>
-          </Form.Control>
-        </Form.Field>
-        <Form.Field className="FormField" name="address">
-          <Flex align={"baseline"} justify={"between"}>
-            <Form.Label className="FormLabel">Address</Form.Label>
-            <Form.Message className="FormMessage" match={"valueMissing"}>
-              Place enter an address
-            </Form.Message>
-          </Flex>
-          <Form.Control asChild>
-            <TextField.Root
-              className="Input"
-              onChange={(e) => handleAddressInput(e)}
-              required
-            >
-              <TextField.Slot></TextField.Slot>
-            </TextField.Root>
-          </Form.Control>
-        </Form.Field>
-        <Form.Submit asChild>
-          <Button
-            className="Button"
-            disabled={(search && !address) || (!search && !address)}
-            onClick={() => searchApi()}
-          >
-            Search
-          </Button>
-        </Form.Submit>
-      </Flex>
+      <Form.Field className="FormField" name="email">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "baseline",
+            justifyContent: "space-between",
+          }}
+        >
+          <Form.Label className="FormLabel">Search</Form.Label>
+        </div>
+        <Form.Control asChild>
+          <input
+            className="Input"
+            type="search"
+            onChange={(e) => handleSearchInput(e)}
+            required
+          />
+        </Form.Control>
+      </Form.Field>
+      <Form.Field className="FormField" name="question">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "baseline",
+            justifyContent: "space-between",
+          }}
+        >
+          <Form.Label className="FormLabel">Address</Form.Label>
+          <Form.Message className="FormMessage" match="valueMissing">
+            Please enter an address
+          </Form.Message>
+        </div>
+        <Form.Control asChild>
+          <input
+            type="text"
+            className="Textarea"
+            required
+            onChange={(e) => handleAddressInput(e)}
+          />
+        </Form.Control>
+      </Form.Field>
+      <Form.Submit asChild>
+        <button
+          className="Button"
+          style={{ marginTop: 10 }}
+          onClick={() => searchApi()}
+          disabled={(search && !address) || (!search && !address)}
+        >
+          Post question
+        </button>
+      </Form.Submit>
     </Form.Root>
   );
 };
 
 export { SearchBar };
-
-// <Section py={'2'}>
-// <form onSubmit={(event) => event.preventDefault()}>
-//   <Flex gap={'3'} direction={'column'}>
-//       <TextField.Root placeholder="Search" onChange={(e) => handleSearchInput(e)} required>
-//         <TextField.Slot>
-//         </TextField.Slot>
-//       </TextField.Root>
-//     <TextField.Root placeholder="Address" onChange={(e) => handleAddressInput(e)}>
-//       <TextField.Slot>
-//       </TextField.Slot>
-//     </TextField.Root>
-//     <Button disabled={search && !address || !search && !address} onClick={() => searchApi()}>Search</Button>
-//   </Flex>
-// </form>
-// </Section>

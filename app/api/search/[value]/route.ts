@@ -1,14 +1,6 @@
 "use server";
 import { NextResponse } from "next/server";
 
-interface Place {
-  opening_hours: any;
-  formatted_address: any;
-  name: string;
-  rating: number;
-  types: string[];
-}
-
 interface NearbySearch {
   place_id: string;
   opening_hours: any;
@@ -25,6 +17,7 @@ export async function POST(
   const { value } = params;
   const url = new URL(request.url);
   const address = url.searchParams.get("address") || "";
+  const rankBy = url.searchParams.get("rankBy");
   console.log(address);
   // rank by, type, keyword, address, type,
   try {
@@ -41,7 +34,7 @@ export async function POST(
       longitude: geoData.results[0].geometry.location.lng,
     };
     const res = await fetch(
-      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${geoLocation.latitude},${geoLocation.longitude}&rankby=distance&type=restaurant,cafe,bakery&keyword=${value}&key=${process.env.API_KEY}`,
+      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${geoLocation.latitude},${geoLocation.longitude}&rankby=${rankBy}${rankBy === "prominence" ? "&radius=1500" : ""}&type=restaurant,cafe,bakery&keyword=${value}&key=${process.env.API_KEY}`,
     );
     const data = await res.json();
 
