@@ -1,5 +1,6 @@
 "use client";
 
+import { Text } from "@radix-ui/themes";
 import * as RadioGroup from "@radix-ui/react-radio-group";
 
 import { FilterButton } from "./FilterButton";
@@ -19,6 +20,7 @@ const FilterRankBy = ({ dispatch, state }: { dispatch: any; state: any }) => {
           handleCheck(e);
         }}
       >
+        <Text>Sort By</Text>
         <FilterButton htmlFor="r1" value="distance">
           Distance
         </FilterButton>
