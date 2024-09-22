@@ -1,11 +1,11 @@
-import { Box } from "@radix-ui/themes";
+import { Box, Container } from "@radix-ui/themes";
 
 import { HomePage } from "./Components";
 
 export default function Home() {
   return (
-    <Box>
+    <div style={{ width: "100%", height: "100vh" }}>
       <HomePage />
-    </Box>
+    </div>
   );
 }

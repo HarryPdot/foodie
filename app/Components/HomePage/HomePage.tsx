@@ -1,10 +1,11 @@
 "use client";
-import { Container } from "@radix-ui/themes";
+import { Box, Container } from "@radix-ui/themes";
 import { useReducer } from "react";
 
 import { FilterRankBy } from "../Filter/FilterRankBy";
+import { NavBar } from "../NavBar/NavBar";
+import { SearchBar } from "../NavBar/SearchBar/SearchBar";
 import { Results } from "../Results/Results";
-import { SearchBar } from "../SearchBar/SearchBar";
 import { reducer } from "./reducer";
 
 const HomePage = () => {
@@ -13,13 +14,16 @@ const HomePage = () => {
     search: "",
     address: "",
     rankBy: "distance",
+    placeid: "",
   });
+
   return (
-    <Container>
+    <Box style={{ width: "100%" }}>
+      <NavBar state={state} dispatch={dispatch} />
       <SearchBar state={state} dispatch={dispatch} />
       <FilterRankBy state={state} dispatch={dispatch} />
       <Results data={state.data} dispatch={dispatch} />
-    </Container>
+    </Box>
   );
 };
 

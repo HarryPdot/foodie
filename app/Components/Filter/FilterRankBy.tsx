@@ -1,7 +1,7 @@
 "use client";
 
-import { Text } from "@radix-ui/themes";
 import * as RadioGroup from "@radix-ui/react-radio-group";
+import { Text } from "@radix-ui/themes";
 
 import { FilterButton } from "./FilterButton";
 const FilterRankBy = ({ dispatch, state }: { dispatch: any; state: any }) => {

@@ -1,4 +1,4 @@
 import { HomePage } from "./HomePage/HomePage";
-import { SearchBar } from "./SearchBar/SearchBar";
+import { SearchBar } from "./NavBar/SearchBar/SearchBar";
 
 export { HomePage, SearchBar };
