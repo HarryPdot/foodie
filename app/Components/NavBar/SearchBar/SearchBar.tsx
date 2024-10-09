@@ -1,13 +1,12 @@
 "use client";
 
 import * as Form from "@radix-ui/react-form";
-import { Button, Flex, Section, TextField } from "@radix-ui/themes";
 
 import { fetcher } from "../../../Service/fetch";
 import styles from "./card.module.css";
 
 const SearchBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
-  const { search, address, data, rankBy } = state;
+  const { search, address, rankBy } = state;
 
   const searchApi = async () => {
     console.log(state.rankBy);
@@ -40,13 +39,6 @@ const SearchBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
     });
   };
 
-  const handleAddressInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: "SET_ADDRESS",
-      payload: e.target.value,
-    });
-  };
-
   return (
     <div className={styles.container}>
       <Form.Root
@@ -63,6 +55,12 @@ const SearchBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
             }}
           >
             <Form.Label className={styles.FormLabel}>Search</Form.Label>
+            <Form.Message
+              className={styles.FormMessage}
+              match={() => !state.address}
+            >
+              Please enter an address
+            </Form.Message>
           </div>
           <Form.Control asChild>
             <input
@@ -70,28 +68,6 @@ const SearchBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
               type="search"
               onChange={(e) => handleSearchInput(e)}
               required
-            />
-          </Form.Control>
-        </Form.Field>
-        <Form.Field className={styles.FormField} name="question">
-          <div
-            style={{
-              display: "flex",
-              alignItems: "baseline",
-              justifyContent: "space-between",
-            }}
-          >
-            <Form.Label className={styles.FormLabel}>Address</Form.Label>
-            <Form.Message className={styles.FormMessage} match="valueMissing">
-              Please enter an address
-            </Form.Message>
-          </div>
-          <Form.Control asChild>
-            <input
-              type="text"
-              className={styles.Input}
-              required
-              onChange={(e) => handleAddressInput(e)}
             />
           </Form.Control>
         </Form.Field>

@@ -8,7 +8,7 @@ interface Props {
 }
 
 const FilterButton = (props: Props) => {
-  const { children, htmlFor, value, checked } = props;
+  const { children, htmlFor, value } = props;
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
       <RadioGroup.Item className="RadioGroupItem" value={value} id={htmlFor}>

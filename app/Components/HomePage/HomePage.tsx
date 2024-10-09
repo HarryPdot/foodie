@@ -1,5 +1,5 @@
 "use client";
-import { Box, Container } from "@radix-ui/themes";
+import { Box } from "@radix-ui/themes";
 import { useReducer } from "react";
 
 import { FilterRankBy } from "../Filter/FilterRankBy";
@@ -15,6 +15,7 @@ const HomePage = () => {
     address: "",
     rankBy: "distance",
     placeid: "",
+    addressArr: [],
   });
 
   return (

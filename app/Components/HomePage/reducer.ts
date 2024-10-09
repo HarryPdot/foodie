@@ -20,6 +20,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         rankBy: action.payload,
       };
+    case "ADD_ADDRESS":
+      return {
+        ...state,
+        addressArr: [...state.addressArr, action.payload],
+      };
     default:
       return state;
   }

@@ -1,7 +1,6 @@
-import { Badge, Box, Button, Card, Flex, Grid, Text } from "@radix-ui/themes";
+import { Badge, Card, Flex, Grid, Text } from "@radix-ui/themes";
 
-import styles from "./Results.module.css";
-const Results = ({ data, dispatch }: { data: any; dispatch: any }) => {
+const Results = ({ data }: { data: any; dispatch: any }) => {
   return (
     <Grid columns="2" gap="3" width="100%" style={{ padding: "20px" }}>
       {data.map((item: any, i: number) => {

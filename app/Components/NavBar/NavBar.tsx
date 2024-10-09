@@ -1,5 +1,4 @@
-import { BookmarkIcon } from "@radix-ui/react-icons";
-import { Box, Flex } from "@radix-ui/themes";
+import { Flex } from "@radix-ui/themes";
 
 import { Address } from "./Address/Address";
 import styles from "./NavBar.module.css";
@@ -15,7 +14,7 @@ const NavBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
         width={"100%"}
         height={"100%"}
       >
-        <Address></Address>
+        <Address state={state} dispatch={dispatch} />
       </Flex>
     </div>
   );
