@@ -21,6 +21,7 @@ export const reducer = (state: any, action: any) => {
         rankBy: action.payload,
       };
     case "ADD_ADDRESS":
+      localStorage.setItem("address", JSON.stringify([state.savedAddresses, action.payload]));
       return {
         ...state,
         savedAddresses: [...state.savedAddresses, action.payload],
@@ -31,9 +32,11 @@ export const reducer = (state: any, action: any) => {
         savedAddresses: action.payload,
       };
     case "DELETE_ADDRESS":
-      if (action.payload) {
+      if ( typeof action.payload === "number") {
         const newArray = [...state.savedAddresses];
         newArray.splice(action.payload, 1);
+        console.log(newArray);
+        localStorage.setItem("address", JSON.stringify(newArray));
         return {
           ...state,
           savedAddresses: newArray,

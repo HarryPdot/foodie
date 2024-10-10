@@ -25,15 +25,15 @@ const Address = ({ state, dispatch }: { state: any; dispatch: any }) => {
     });
     setAddress("");
     console.log(localStorage.getItem("address"));
-    localStorage.setItem("address", JSON.stringify(state.savedAddresses));
+
   };
 
   const deleteAddress = (i: number) => {
+    console.log(i)
     dispatch({
       type: "DELETE_ADDRESS",
       payload: i,
     });
-    localStorage.setItem("address", JSON.stringify(state.savedAddresses));
   };
 
   return (
