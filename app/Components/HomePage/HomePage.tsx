@@ -1,6 +1,6 @@
 "use client";
 import { Box } from "@radix-ui/themes";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
 import { FilterRankBy } from "../Filter/FilterRankBy";
 import { NavBar } from "../NavBar/NavBar";
@@ -15,8 +15,18 @@ const HomePage = () => {
     address: "",
     rankBy: "distance",
     placeid: "",
-    addressArr: [],
+    savedAddresses: [],
   });
+
+  useEffect(() => {
+    const address = JSON.parse(localStorage.getItem("address") || "[]");
+    if (address) {
+      dispatch({
+        type: "LOAD_ADDRESS",
+        payload: address,
+      });
+    }
+  }, []);
 
   return (
     <Box style={{ width: "100%" }}>

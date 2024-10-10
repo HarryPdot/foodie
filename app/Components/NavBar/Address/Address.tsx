@@ -24,6 +24,16 @@ const Address = ({ state, dispatch }: { state: any; dispatch: any }) => {
       payload: address,
     });
     setAddress("");
+    console.log(localStorage.getItem("address"));
+    localStorage.setItem("address", JSON.stringify(state.savedAddresses));
+  };
+
+  const deleteAddress = (i: number) => {
+    dispatch({
+      type: "DELETE_ADDRESS",
+      payload: i,
+    });
+    localStorage.setItem("address", JSON.stringify(state.savedAddresses));
   };
 
   return (
@@ -37,7 +47,10 @@ const Address = ({ state, dispatch }: { state: any; dispatch: any }) => {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className={styles.DialogOverlay} />
-        <Dialog.Content className={styles.DialogContent}>
+        <Dialog.Content
+          className={styles.DialogContent}
+          aria-describedby={undefined}
+        >
           <Dialog.Title className={styles.DialogTitle}>Address</Dialog.Title>
           <div
             style={{
@@ -76,24 +89,27 @@ const Address = ({ state, dispatch }: { state: any; dispatch: any }) => {
             <RadioCards.Root
               defaultValue={
                 state.address
-                  ? state.addressArr.indexOf(state.address).toString()
+                  ? state.savedAddresses.indexOf(state.address).toString()
                   : "0"
               }
             >
               <Flex direction="column" width="100%" gap={"1"}>
-                {state.addressArr.map((address: string, i: number) => {
+                {state.savedAddresses.map((address: string, i: number) => {
                   return (
-                    <RadioCards.Item
-                      key={i}
-                      value={`${i}`}
-                      onClick={() => {
-                        dispatch({ type: "SET_ADDRESS", payload: address });
-                      }}
-                    >
-                      <Flex direction="column" width="100%">
-                        <Text weight={"bold"}>{address}</Text>
-                      </Flex>
-                    </RadioCards.Item>
+                    <Flex justify={"between"} gap={"3"} key={i}>
+                      <RadioCards.Item
+                        style={{ width: "100%" }}
+                        value={`${i}`}
+                        onClick={() => {
+                          dispatch({ type: "SET_ADDRESS", payload: address });
+                        }}
+                      >
+                        <Flex direction="column" width="100%">
+                          <Text weight={"bold"}>{address}</Text>
+                        </Flex>
+                      </RadioCards.Item>
+                      <button onClick={() => deleteAddress(i)}>Delete</button>
+                    </Flex>
                   );
                 })}
               </Flex>
