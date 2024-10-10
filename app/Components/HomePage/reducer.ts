@@ -29,6 +29,7 @@ export const reducer = (state: any, action: any) => {
     case "LOAD_ADDRESS":
       return {
         ...state,
+        address: action.payload[0],
         savedAddresses: action.payload,
       };
     case "DELETE_ADDRESS":

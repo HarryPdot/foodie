@@ -1,4 +1,4 @@
-import { Flex } from "@radix-ui/themes";
+import { Flex, Text } from "@radix-ui/themes";
 
 import { Address } from "./Address/Address";
 import styles from "./NavBar.module.css";
@@ -14,7 +14,10 @@ const NavBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
         width={"100%"}
         height={"100%"}
       >
-        <Address state={state} dispatch={dispatch} />
+        <Flex direction={"row"} align={"center"} gap={"0.5rem"}>
+          <Text weight={"bold"}>{state.address}</Text>
+          <Address state={state} dispatch={dispatch} />
+        </Flex>
       </Flex>
     </div>
   );
