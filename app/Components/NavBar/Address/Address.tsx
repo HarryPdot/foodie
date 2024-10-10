@@ -30,10 +30,17 @@ const Address = ({ state, dispatch }: { state: any; dispatch: any }) => {
 
   const deleteAddress = (i: number) => {
     console.log(i)
+      if(state.savedAddresses[i] === state.address){ 
+        dispatch({
+          type: "SET_ADDRESS",
+          payload: state.savedAddresses[0],
+        });
+      }
     dispatch({
       type: "DELETE_ADDRESS",
       payload: i,
     });
+
   };
 
   return (
