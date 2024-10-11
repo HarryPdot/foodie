@@ -9,7 +9,6 @@ const SearchBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
   const { search, address, rankBy } = state;
 
   const searchApi = async () => {
-    console.log(state.rankBy);
     const value = search && address ? `${search} near ${address}` : search;
     try {
       const url =

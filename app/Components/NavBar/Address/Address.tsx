@@ -7,40 +7,20 @@ import { clsx } from "clsx";
 import React from "react";
 
 import styles from "./Address.module.css";
+import { AddressPredictions } from "./AddressPredictions";
 const Address = ({ state, dispatch }: { state: any; dispatch: any }) => {
-  const [address, setAddress] = React.useState("");
-  const handleAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAddress(e.target.value);
-  };
-
-  const handleAddressInput = () => {
-    if (address === "") return;
-    dispatch({
-      type: "ADD_ADDRESS",
-      payload: address,
-    });
-    dispatch({
-      type: "SET_ADDRESS",
-      payload: address,
-    });
-    setAddress("");
-    console.log(localStorage.getItem("address"));
-
-  };
-
   const deleteAddress = (i: number) => {
-    console.log(i)
-      if(state.savedAddresses[i] === state.address){ 
-        dispatch({
-          type: "SET_ADDRESS",
-          payload: state.savedAddresses[0],
-        });
-      }
+    console.log(i);
+    if (state.savedAddresses[i] === state.address) {
+      dispatch({
+        type: "SET_ADDRESS",
+        payload: state.savedAddresses[0],
+      });
+    }
     dispatch({
       type: "DELETE_ADDRESS",
       payload: i,
     });
-
   };
 
   return (
@@ -72,25 +52,8 @@ const Address = ({ state, dispatch }: { state: any; dispatch: any }) => {
               className={styles.LabelRoot}
               htmlFor="firstName"
             ></Label.Root>
-            <form
-              onSubmit={(event) => event.preventDefault()}
-              style={{ width: "100%" }}
-            >
-              <input
-                className={styles.Input}
-                value={address}
-                type="text"
-                style={{ width: "100%" }}
-                id="address"
-                placeholder="Search an Address"
-                onChange={(e) => handleAddress(e)}
-              />
-              <input
-                type="submit"
-                onClick={() => handleAddressInput()}
-                style={{ display: "none" }}
-              />
-            </form>
+
+            <AddressPredictions dispatch={dispatch} state={state} />
           </div>
           <Theme appearance="light">
             <RadioCards.Root

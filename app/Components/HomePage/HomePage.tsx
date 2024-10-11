@@ -7,7 +7,6 @@ import { NavBar } from "../NavBar/NavBar";
 import { SearchBar } from "../NavBar/SearchBar/SearchBar";
 import { Results } from "../Results/Results";
 import { reducer } from "./reducer";
-
 const HomePage = () => {
   const [state, dispatch] = useReducer(reducer, {
     data: [],
