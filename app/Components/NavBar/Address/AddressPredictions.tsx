@@ -40,7 +40,7 @@ const AddressPredictions = ({
       payload: input,
     });
     setInput("");
-    setOpen(false);
+    setPredictions([]);
   };
 
   return (
@@ -72,7 +72,7 @@ const AddressPredictions = ({
           value={"Add"}
         />
       </form>
-      <Select.Root onValueChange={setInput} open={open}>
+      <Select.Root onValueChange={setInput} open={open ? true : false}>
         <Select.Trigger>
           <Select.Value />
         </Select.Trigger>
