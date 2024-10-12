@@ -45,7 +45,7 @@ const SearchBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
         onSubmit={(event) => event.preventDefault()}
         style={{ padding: "10px" }}
       >
-        <Form.Field className={styles.FormField} name="email">
+        <Form.Field className={styles.FormField} name="search" >
           <div
             style={{
               display: "flex",
@@ -66,6 +66,7 @@ const SearchBar = ({ state, dispatch }: { state: any; dispatch: any }) => {
               className={styles.Input}
               type="search"
               onChange={(e) => handleSearchInput(e)}
+              autoComplete="off"
               required
             />
           </Form.Control>

@@ -17,7 +17,9 @@ const AddressPredictions = ({
 
   const handleAddress = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
-    if (input.length < 5) return;
+    if (e.target.value.length <= 5) {
+      return setPredictions([])
+    }
     setOpen(true);
     try {
       const url = new URL(`/api/autocomplete/${input}`, window.location.origin);
@@ -89,6 +91,9 @@ const AddressPredictions = ({
                     value={place.description}
                     key={i}
                     style={{ cursor: "pointer" }}
+                    onClick={() => {
+                        return setPredictions([])
+                    }}
                   >
                     {place.description}
                   </Select.Item>
